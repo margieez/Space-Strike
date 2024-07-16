@@ -1,0 +1,259 @@
+/* Estilos generales */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Evita la barra de desplazamiento horizontal */
+}
+
+body {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-image: url('https://i.pinimg.com/564x/68/01/e8/6801e81cbfa835ca4dfba50c61c0375a.jpg'); /* Imagen de fondo inicial */
+}
+
+/* Estilos para el menú inicial */
+#menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px; /* Ajusta el máximo ancho del menú */
+    margin-top: 20px; /* Margen superior para separar del borde superior */
+}
+
+.titulo {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px; /* Espacio entre el título y las opciones */
+    text-align: center; /* Centrar el título horizontalmente */
+}
+
+.opciones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Espacio entre las opciones */
+}
+
+.opciones > div, .opciones > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 120px; /* Ancho de cada botón */
+    height: 120px; /* Alto de cada botón */
+}
+
+.opciones > div > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para cubrir todo el espacio */
+}
+
+#play-button {
+    background-color: transparent; 
+    background-image: url('https://i.postimg.cc/V67RnYd4/Dise-o-sin-t-tulo-1.png');
+    background-size: cover; /* Ajusta la imagen para cubrir todo el espacio del botón */
+    background-position: center; /* Centra la imagen dentro del botón */
+    border: none; /* Elimina el borde predeterminado del botón */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white; /* Color del texto */
+    font-size: 16px; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    outline: none; /* Elimina el contorno al hacer clic */
+}
+
+/* Estilos para el juego y pantalla de carga */
+#game-container {
+    display: none;
+    width: 100vw; /* Usamos vw en lugar de % para evitar la barra de desplazamiento horizontal */
+    height: 100vh; /* Usamos vh en lugar de % para evitar la barra de desplazamiento horizontal */
+    position: relative; /* Añadido para posicionar correctamente los elementos hijos */
+}
+
+#movable-div {
+    width: 80px; /* Ancho original */
+    height: 120px; /* Alto original */
+    position: absolute;
+    top: 50%; /* Centrado verticalmente */
+    left: 50%; /* Centrado horizontalmente */
+    transform: translate(-50%, -50%);
+    background-image: url('https://i.postimg.cc/pdGWTtpf/SPACE-X-Spine-animation-1-2-unscreen.gif'); 
+    background-size: cover; /* Ajusta la imagen para cubrir todo el div */
+    background-position: center; /* Centra la imagen dentro del div */
+}
+
+.enemy-div {
+    width: 80px; /* Ancho original */
+    height: 80px; /* Alto original */
+    position: absolute;
+    top: -50px; /* Empieza fuera de la pantalla */
+    animation: fall linear;
+    background-image: url('https://i.postimg.cc/y8D28dNV/descarga-3-unscreen.gif'); 
+    background-size: cover; /* Ajusta la imagen para cubrir todo el div */
+    background-position: center; /* Centra la imagen dentro del div */
+}
+
+@keyframes fall {
+    from {
+        top: -50px;
+    }
+    to {
+        top: 100vh;
+    }
+}
+
+/* Estilos para la pantalla de carga */
+#loader {
+    width: 100vw; /* Usamos vw en lugar de % para evitar la barra de desplazamiento horizontal */
+    height: 100vh; /* Usamos vh en lugar de % para evitar la barra de desplazamiento horizontal */
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    position: fixed; /* Asegura que la pantalla de carga se mantenga en posición fija */
+    top: 0;
+    left: 0;
+    z-index: 999; /* Asegura que la pantalla de carga esté por encima de todo */
+}
+
+.bar {
+    width: 300px;
+    height: 30px;
+    border: 2px solid #fff;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.bar:before {
+    content: '';
+    position: absolute;
+    width: 0; /* Inicia con ancho cero */
+    height: 100%;
+    background-color: #fff;
+    animation: loading 5s linear; /* Animación de carga */
+}
+
+.text {
+    font-size: 24px;
+}
+
+@keyframes loading {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+/* Estilos para la ventana emergente de reinicio */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de la pantalla de juego */
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content p {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.popup-content button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.popup-content button:hover {
+    background-color: #45a049;
+}
+/* Estilos para el mini-menú de ajustes de sonido */
+.mini-menu {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    border-radius: 5%;
+}
+
+.mini-menu p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.mini-menu button {
+    width: 80px; /* Ajuste el tamaño del botón cuadrado según sea necesario */
+    height: 80px; /* Ajuste el tamaño del botón cuadrado según sea necesario */
+    padding: 0; /* Eliminamos el relleno para ajustar mejor las imágenes */
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+#close-sound-settings {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 18px;
+}
+
+#sound-on {
+    background-image: url('https://i.postimg.cc/rsw-BW52b/Dise-o-sin-t-tulo-2-removebg-preview.png');
+    background-size: cover;
+    background-position: center;
+    color: transparent;
+}
+
+#sound-off {
+    background-image: url('https://i.postimg.cc/sxHtJ1V2/Dise-o-sin-t-tulo-3-removebg-preview.png');
+    background-size: cover;
+    background-position: center;
+    color: transparent;
+}
